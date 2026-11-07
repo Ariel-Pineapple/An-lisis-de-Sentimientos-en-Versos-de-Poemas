@@ -1,0 +1,15 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: CI del analizador de versos
+
+on: [push]
+
+jobs:
+  validar-python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Comprobar sintaxis de app.py
+        run: python3 -m py_compile app.py
