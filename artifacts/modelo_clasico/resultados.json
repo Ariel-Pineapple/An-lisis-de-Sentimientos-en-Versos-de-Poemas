@@ -1,0 +1,90 @@
+{
+  "modelo": "TF-IDF + LogisticRegression",
+  "dataset": "google-research-datasets/poem_sentiment",
+  "clases": {
+    "0": "negative",
+    "1": "positive",
+    "2": "no_impact"
+  },
+  "clase_excluida": "mixed",
+  "parametros_seleccionados": {
+    "clasificador__C": 10.0,
+    "tfidf__ngram_range": [
+      1,
+      1
+    ]
+  },
+  "class_weight": "balanced",
+  "f1_macro_cv": 0.492394499728508,
+  "f1_macro_validacion": 0.5509126984126984,
+  "reporte_validacion": {
+    "negative": {
+      "precision": 0.5384615384615384,
+      "recall": 0.3684210526315789,
+      "f1-score": 0.4375,
+      "support": 19.0
+    },
+    "positive": {
+      "precision": 0.5454545454545454,
+      "recall": 0.35294117647058826,
+      "f1-score": 0.42857142857142855,
+      "support": 17.0
+    },
+    "no_impact": {
+      "precision": 0.7283950617283951,
+      "recall": 0.855072463768116,
+      "f1-score": 0.7866666666666666,
+      "support": 69.0
+    },
+    "accuracy": 0.6857142857142857,
+    "macro avg": {
+      "precision": 0.6041037152148263,
+      "recall": 0.525478230956761,
+      "f1-score": 0.5509126984126984,
+      "support": 105.0
+    },
+    "weighted avg": {
+      "precision": 0.664407197740531,
+      "recall": 0.6857142857142857,
+      "f1-score": 0.6655068027210884,
+      "support": 105.0
+    }
+  },
+  "python": "3.12.15",
+  "scikit_learn": "1.9.1",
+  "prueba_evaluada": true,
+  "f1_macro_prueba": 0.4399723947550034,
+  "reporte_prueba": {
+    "negative": {
+      "precision": 0.3125,
+      "recall": 0.2631578947368421,
+      "f1-score": 0.2857142857142857,
+      "support": 19.0
+    },
+    "positive": {
+      "precision": 0.42857142857142855,
+      "recall": 0.1875,
+      "f1-score": 0.2608695652173913,
+      "support": 16.0
+    },
+    "no_impact": {
+      "precision": 0.7160493827160493,
+      "recall": 0.8405797101449275,
+      "f1-score": 0.7733333333333333,
+      "support": 69.0
+    },
+    "accuracy": 0.6346153846153846,
+    "macro avg": {
+      "precision": 0.48570693709582596,
+      "recall": 0.43041253496058984,
+      "f1-score": 0.4399723947550034,
+      "support": 104.0
+    },
+    "weighted avg": {
+      "precision": 0.5980966371591372,
+      "recall": 0.6346153846153846,
+      "f1-score": 0.6054085045389394,
+      "support": 104.0
+    }
+  }
+}
