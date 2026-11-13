@@ -71,3 +71,31 @@ Git versiona métricas y predicciones, y excluye los pesos. El `Dockerfile` actu
 - Verificar que las matrices del informe y de Streamlit se generen a partir de la misma ejecución que las métricas publicadas.
 
 El alcance evaluado se limita a versos en inglés y a las tres clases indicadas. Al analizar un poema, la interfaz procesa cada línea de forma independiente.
+
+
+## Monitoreo del clasificador de sentimientos en versos
+
+En la Actividad 8 usamos el clasificador de versos como caso de estudio para
+explicar cómo observar un modelo en producción, detectar incidentes y comprobar
+si una intervención funcionó.
+
+| Concepto | Qué significa | Ejemplo aplicado al proyecto |
+|---|---|---|
+| **Observabilidad** | Capacidad de entender qué ocurre en el sistema a partir de métricas, logs y trazas. | Una métrica muestra que la predicción tarda más. Una traza permite ubicar la demora en la tokenización o en la inferencia. |
+| **Monitorización proactiva** | Seguimiento continuo de señales para detectar problemas antes de que su impacto aumente. | Detectar que la latencia sube durante varias ventanas antes de recibir reportes de usuarios. |
+| **SLI, SLO y SLA** | El **SLI** es el indicador medido. El **SLO** es su objetivo. El **SLA** es el compromiso formal con el cliente y puede establecer consecuencias si se incumple. | **SLI:** porcentaje de solicitudes válidas que terminan con éxito en 500 ms o menos. **SLO de ejemplo:** alcanzar el 99 % en 30 días. **SLA:** aplicaría si ese nivel se formalizara con un cliente. |
+| **Alertamiento inteligente** | Reglas que consideran cuánto dura una anomalía, cuántas solicitudes afecta y qué impacto tiene. | Disparar una alerta si aumenta la proporción de respuestas tardías durante dos ventanas consecutivas con tráfico suficiente. |
+| **Golden Signals** | Cuatro señales de salud del servicio: latencia, tráfico, errores y saturación. | Medir latencia p95, solicitudes por minuto, porcentaje de fallas y uso de memoria o tamaño de la cola. |
+| **Dashboard operativo** | Tablero que reúne las señales necesarias para decidir si hace falta intervenir. | Mostrar la latencia, el volumen de solicitudes, la versión activa del modelo y las alertas abiertas. |
+| **SRE (*Site Reliability Engineering*)** | Disciplina que aplica ingeniería de software a la confiabilidad y operación de servicios. | Definir quién atiende una alerta, cómo revierte un cambio y qué medición confirma la recuperación. |
+| **Monitorización de sistemas distribuidos** | Seguimiento de una solicitud a través de varios componentes mediante métricas, logs y trazas correlacionadas. | En un despliegue con componentes separados, seguir una predicción desde la interfaz hasta la API y el servicio de inferencia con un identificador de traza. |
+| **Data drift y model drift** | El *data drift* es un cambio en la distribución de las entradas. El término *model drift* suele usarse para describir el deterioro del desempeño del modelo con el tiempo. | Recibir textos mucho más largos que los de referencia indica un posible *data drift*. Una caída del F1 macro en ejemplos recientes etiquetados aporta evidencia de degradación. |
+| **MLOps y monitoreo en producción** | MLOps abarca el versionado, la validación, el despliegue y la operación de modelos. El monitoreo comprueba cómo se comporta el modelo una vez desplegado. | Identificar qué versión de DistilBERT está activa, registrar sus métricas y validar un modelo candidato antes de promoverlo. |
+
+### Incidentes propuestos para la Actividad 8
+
+1. **Aumento de latencia.** Introducir una demora controlada, observar la alerta,
+   ejecutar el runbook y repetir la medición después de revertir el cambio.
+2. **Cambio en los datos de entrada.** Comparar un lote de textos largos con
+   la distribución de referencia. Si se detecta drift, revisar una muestra
+   etiquetada para determinar si también se deterioró la calidad de las predicciones.
